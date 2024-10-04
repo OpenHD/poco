@@ -44,7 +44,7 @@ endif()
 #################################################################################
 
 # C++17 compiler flags
-include(CXX1x)
+include(/lib/poco/CXX1x)
 check_for_cxx17_compiler(CXX17_COMPILER)
 
 # If a C++17 compiler is available, then set the appropriate flags
