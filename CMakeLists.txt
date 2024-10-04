@@ -31,13 +31,13 @@ foreach(OUTPUTCONFIG ${CMAKE_CONFIGURATION_TYPES})
 endforeach(OUTPUTCONFIG)
 
 # Append our module directory to CMake
-list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/lib/poco/cmake)
 
 if(CMAKE_VERSION VERSION_LESS "3.10")
-	list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/V39)
+	list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/lib/poco/cmake/V39)
 endif()
 if(CMAKE_VERSION VERSION_LESS "3.14")
-	list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/V313)
+	list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/lib/poco/cmake/V313)
 endif()
 #################################################################################
 # Setup C/C++ compiler options
@@ -114,7 +114,7 @@ else()
 endif()
 
 if(APR_FOUND AND APRUTIL_FOUND AND APACHE2_FOUND AND
-	EXISTS ${PROJECT_SOURCE_DIR}/ApacheConnector AND ENABLE_APACHECONNECTOR)
+	EXISTS ${PROJECT_SOURCE_DIR}/lib/poco/ApacheConnector AND ENABLE_APACHECONNECTOR)
 	option(ENABLE_APACHECONNECTOR "Enable ApacheConnector" ON)
 else()
 	option(ENABLE_APACHECONNECTOR "Enable ApacheConnector" OFF)
@@ -360,12 +360,12 @@ if(ENABLE_NET)
 	list(APPEND Poco_COMPONENTS "Net")
 endif()
 
-if(EXISTS ${PROJECT_SOURCE_DIR}/MongoDB AND ENABLE_MONGODB)
+if(EXISTS ${PROJECT_SOURCE_DIR}/lib/poco/MongoDB AND ENABLE_MONGODB)
 	add_subdirectory(MongoDB)
 	list(APPEND Poco_COMPONENTS "MongoDB")
 endif()
 
-if(EXISTS ${PROJECT_SOURCE_DIR}/Redis AND ENABLE_REDIS)
+if(EXISTS ${PROJECT_SOURCE_DIR}/lib/poco/Redis AND ENABLE_REDIS)
 	add_subdirectory(Redis)
 	list(APPEND Poco_COMPONENTS "Redis")
 endif()
@@ -375,34 +375,34 @@ if(ENABLE_DNSSD)
 	list(APPEND Poco_COMPONENTS "DNSSD")
 endif()
 
-if(EXISTS ${PROJECT_SOURCE_DIR}/Prometheus AND ENABLE_PROMETHEUS)
+if(EXISTS ${PROJECT_SOURCE_DIR}/lib/poco/Prometheus AND ENABLE_PROMETHEUS)
 	add_subdirectory(Prometheus)
 	list(APPEND Poco_COMPONENTS "Prometheus")
 endif()
 
-if(EXISTS ${PROJECT_SOURCE_DIR}/PDF AND ENABLE_PDF)
+if(EXISTS ${PROJECT_SOURCE_DIR}/lib/poco/PDF AND ENABLE_PDF)
 	add_subdirectory(PDF)
 	list(APPEND Poco_COMPONENTS "PDF")
 endif()
 
-if(EXISTS ${PROJECT_SOURCE_DIR}/JWT AND ENABLE_JWT)
+if(EXISTS ${PROJECT_SOURCE_DIR}/lib/poco/JWT AND ENABLE_JWT)
 	add_subdirectory(JWT)
 	list(APPEND Poco_COMPONENTS "JWT")
 endif()
 
 #NetSSL
 
-if(WIN32 AND EXISTS ${PROJECT_SOURCE_DIR}/NetSSL_Win AND ENABLE_NETSSL_WIN)
+if(WIN32 AND EXISTS ${PROJECT_SOURCE_DIR}/lib/poco/NetSSL_Win AND ENABLE_NETSSL_WIN)
 	add_subdirectory(NetSSL_Win)
 	list(APPEND Poco_COMPONENTS "NetSSL_Win")
-endif(WIN32 AND EXISTS ${PROJECT_SOURCE_DIR}/NetSSL_Win AND ENABLE_NETSSL_WIN)
+endif(WIN32 AND EXISTS ${PROJECT_SOURCE_DIR}/lib/poco/NetSSL_Win AND ENABLE_NETSSL_WIN)
 
 if(OPENSSL_FOUND)
-	if(EXISTS ${PROJECT_SOURCE_DIR}/NetSSL_OpenSSL AND ENABLE_NETSSL)
+	if(EXISTS ${PROJECT_SOURCE_DIR}/lib/poco/NetSSL_OpenSSL AND ENABLE_NETSSL)
 		add_subdirectory(NetSSL_OpenSSL)
 		list(APPEND Poco_COMPONENTS "NetSSL_OpenSSL")
 	endif()
-	if(EXISTS ${PROJECT_SOURCE_DIR}/Crypto AND ENABLE_CRYPTO)
+	if(EXISTS ${PROJECT_SOURCE_DIR}/lib/poco/Crypto AND ENABLE_CRYPTO)
 		add_subdirectory(Crypto)
 		list(APPEND Poco_COMPONENTS "Crypto")
 	endif()
@@ -411,7 +411,7 @@ endif(OPENSSL_FOUND)
 
 option(POCO_DATA_NO_SQL_PARSER "Disable SQL parser" OFF)
 
-if(EXISTS ${PROJECT_SOURCE_DIR}/Data AND ENABLE_DATA)
+if(EXISTS ${PROJECT_SOURCE_DIR}/lib/poco/Data AND ENABLE_DATA)
 	if(POCO_DATA_NO_SQL_PARSER)
 		add_definitions(-DPOCO_DATA_NO_SQL_PARSER=1)
 	endif()
@@ -419,74 +419,74 @@ if(EXISTS ${PROJECT_SOURCE_DIR}/Data AND ENABLE_DATA)
 	list(APPEND Poco_COMPONENTS "Data")
 endif()
 
-if(EXISTS ${PROJECT_SOURCE_DIR}/Data/SQLite AND ENABLE_DATA_SQLITE)
+if(EXISTS ${PROJECT_SOURCE_DIR}/lib/poco/Data/SQLite AND ENABLE_DATA_SQLITE)
 	list(APPEND Poco_COMPONENTS "Data/SQLite")
 endif()
 
-if(EXISTS ${PROJECT_SOURCE_DIR}/Data/MySQL AND ENABLE_DATA_MYSQL)
+if(EXISTS ${PROJECT_SOURCE_DIR}/lib/poco/Data/MySQL AND ENABLE_DATA_MYSQL)
 	list(APPEND Poco_COMPONENTS "Data/MySQL")
 endif()
 
-if(EXISTS ${PROJECT_SOURCE_DIR}/Data/PostgreSQL AND ENABLE_DATA_POSTGRESQL)
+if(EXISTS ${PROJECT_SOURCE_DIR}/lib/poco/Data/PostgreSQL AND ENABLE_DATA_POSTGRESQL)
 	list(APPEND Poco_COMPONENTS "Data/PostgreSQL")
 endif()
 
-if(EXISTS ${PROJECT_SOURCE_DIR}/ActiveRecord AND ENABLE_ACTIVERECORD)
+if(EXISTS ${PROJECT_SOURCE_DIR}/lib/poco/ActiveRecord AND ENABLE_ACTIVERECORD)
 	add_subdirectory(ActiveRecord)
 	list(APPEND Poco_COMPONENTS "ActiveRecord")
 endif()
 
-if(EXISTS ${PROJECT_SOURCE_DIR}/ActiveRecord/Compiler AND ENABLE_ACTIVERECORD_COMPILER)
+if(EXISTS ${PROJECT_SOURCE_DIR}/lib/poco/ActiveRecord/Compiler AND ENABLE_ACTIVERECORD_COMPILER)
 	add_subdirectory(ActiveRecord/Compiler)
 	list(APPEND Poco_COMPONENTS "ActiveRecordCompiler")
 endif()
 
-if(EXISTS ${PROJECT_SOURCE_DIR}/SevenZip AND ENABLE_SEVENZIP AND ENABLE_XML)
+if(EXISTS ${PROJECT_SOURCE_DIR}/lib/poco/SevenZip AND ENABLE_SEVENZIP AND ENABLE_XML)
 	add_subdirectory(SevenZip)
 	list(APPEND Poco_COMPONENTS "SevenZip")
 endif()
 
-if(EXISTS ${PROJECT_SOURCE_DIR}/Zip AND ENABLE_ZIP AND ENABLE_XML)
+if(EXISTS ${PROJECT_SOURCE_DIR}/lib/poco/Zip AND ENABLE_ZIP AND ENABLE_XML)
 	add_subdirectory(Zip)
 	list(APPEND Poco_COMPONENTS "Zip")
 endif()
 
 if(APRUTIL_FOUND AND APACHE_FOUND AND
-	EXISTS ${PROJECT_SOURCE_DIR}/ApacheConnector AND ENABLE_APACHECONNECTOR)
+	EXISTS ${PROJECT_SOURCE_DIR}/lib/poco/ApacheConnector AND ENABLE_APACHECONNECTOR)
 	add_subdirectory(ApacheConnector)
 	list(APPEND Poco_COMPONENTS "ApacheConnector")
 endif()
 
-if(EXISTS ${PROJECT_SOURCE_DIR}/CppParser AND ENABLE_CPPPARSER)
+if(EXISTS ${PROJECT_SOURCE_DIR}/lib/poco/CppParser AND ENABLE_CPPPARSER)
 	add_subdirectory(CppParser)
 	list(APPEND Poco_COMPONENTS "CppParser")
 endif()
 
-if(EXISTS ${PROJECT_SOURCE_DIR}/PocoDoc AND ENABLE_POCODOC)
+if(EXISTS ${PROJECT_SOURCE_DIR}/lib/poco/PocoDoc AND ENABLE_POCODOC)
 	add_subdirectory(PocoDoc)
 	list(APPEND Poco_COMPONENTS "PocoDoc")
 endif()
 
-if(EXISTS ${PROJECT_SOURCE_DIR}/PageCompiler AND ENABLE_PAGECOMPILER)
+if(EXISTS ${PROJECT_SOURCE_DIR}/lib/poco/PageCompiler AND ENABLE_PAGECOMPILER)
 	add_subdirectory(PageCompiler)
 	list(APPEND Poco_COMPONENTS "PageCompiler")
 endif()
 
-if(EXISTS ${PROJECT_SOURCE_DIR}/PageCompiler/File2Page AND ENABLE_PAGECOMPILER_FILE2PAGE)
+if(EXISTS ${PROJECT_SOURCE_DIR}/lib/poco/PageCompiler/File2Page AND ENABLE_PAGECOMPILER_FILE2PAGE)
 	add_subdirectory(PageCompiler/File2Page)
 	list(APPEND Poco_COMPONENTS "File2Page")
 endif()
 
-if(EXISTS ${PROJECT_SOURCE_DIR}/Encodings/Compiler AND ENABLE_ENCODINGS_COMPILER)
+if(EXISTS ${PROJECT_SOURCE_DIR}/lib/poco/Encodings/Compiler AND ENABLE_ENCODINGS_COMPILER)
 	add_subdirectory(Encodings/Compiler)
 	list(APPEND Poco_COMPONENTS "EncodingsCompiler")
 endif()
 
 
 #############################################################
-# Uninstall stuff see: http://www.vtk.org/Wiki/CMake_FAQ
+# Uninstall stuff see: http:/www.vtk.org/Wiki/CMake_FAQ
 configure_file(
-	"${CMAKE_CURRENT_SOURCE_DIR}/cmake/cmake_uninstall.cmake.in"
+	"${CMAKE_CURRENT_SOURCE_DIR}/lib/poco/cmake/cmake_uninstall.cmake.in"
 	"${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake"
 	IMMEDIATE @ONLY)
 
@@ -503,8 +503,8 @@ endif()
 
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Poco Libraries")
 set(CPACK_PACKAGE_VENDOR "Applied Informatics Software Engineering GmbH")
-set(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_CURRENT_SOURCE_DIR}/README")
-set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/LICENSE")
+set(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_CURRENT_SOURCE_DIR}/lib/poco/README")
+set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/lib/poco/LICENSE")
 set(CPACK_PACKAGE_INSTALL_DIRECTORY "/usr/local")
 
 include(CPack)
