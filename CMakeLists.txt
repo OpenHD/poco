@@ -43,20 +43,14 @@ endif()
 # Setup C/C++ compiler options
 #################################################################################
 
-# C++17 compiler flags
-include(/lib/poco/CXX1x)
-check_for_cxx17_compiler(CXX17_COMPILER)
-
 # If a C++17 compiler is available, then set the appropriate flags
-if(CXX17_COMPILER)
-	set(CMAKE_CXX_STANDARD 17)
-	set(CMAKE_CXX_STANDARD_REQUIRED ON)
-else()
-	message(FATAL_ERROR "Compiler does not support C++17.")
-endif()
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 
-if(NOT CMAKE_BUILD_TYPE)
-	set(CMAKE_BUILD_TYPE "RelWithDebInfo")
+# Check if the compiler supports C++17
+if(NOT CMAKE_CXX_COMPILER_VERSION)
+    message(FATAL_ERROR "Compiler does not support C++17.")
 endif()
 
 # Enable standard installation directories
